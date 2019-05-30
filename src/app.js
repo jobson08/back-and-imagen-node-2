@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const morgan = require('morgan');
 const multer = require('multer');
@@ -6,12 +8,18 @@ const exphbs = require('express-handlebars');
 
 const app = express();
 
+
+ require('./database');
+
 //Sentings
 const port = process.env.PORT || 4000;
+
+//app.set('port', process.env.PORT );
+
 app.set('views', path.join(__dirname, 'views'));
 app.engine('hbs', exphbs({
     defaultLayout:'main',
-    layoutsDir: path.join(app.get('views'), 'lyouts'),
+    layoutsDir: path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
     extname: '.hbs'
 }));
@@ -29,13 +37,6 @@ const storage = multer.diskStorage({
     }
 });
 app.use(multer({storage}).single('image'));
-//app.use(multer({storage}).single('image'));
-
-//DB conect
-/*mongoose
-  .connect(db, {useNewUrlParser: true})
-  .then(() => console.log('MongoDB conectado...'))
-  .catch(err => console.log(err)); */
 
 //Routes
 app.use(require("./route"));
