@@ -15,20 +15,23 @@ cloudinary.config({
 
 const fs = require('fs-extra');
 
-router.get('/', (req, res) =>{
-    res.render('images')
+router.get('/', async (req, res) =>{
+    const fotos = await Imagen.find(); 
+    res.render('compImagens', {fotos});
 });
 
-router.get('/imagens/add', (req, res)=>{
-    res.render('image_form');
+router.get('/imagens/add', async (req, res)=>{
+    const fotos = await Imagen.find(); 
+    res.render('compImage_form', {fotos});
 });
 
 router.post('/imagens/add', async  (req, res) =>{
-    console.log(req.body);
-    const{title, description} = req.body;
+    const { title, description } = req.body;
     console.log(req.file);
+
    const result = await cloudinary.v2.uploader.upload(req.file.path);
    console.log(result);
+
    const newImagen = new Imagen({
         title,
         description,
@@ -38,7 +41,7 @@ router.post('/imagens/add', async  (req, res) =>{
     await newImagen.save();
     await fs.unlink(req.file.path)
 
-    res.send('imagem recebido');
+    res.send('imagen recebido');
 });
 
 module.exports = router;

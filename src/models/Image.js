@@ -1,13 +1,13 @@
 const {Schema, model } = require('mongoose');
 
-const Imagen = new Schema({
-    titulo: String,
-    descricao: String,
+const imageSchema = new Schema({
+    title: String,
+    description: String,
     imageURL: String,
     public_id:String,
 });
 
-module.exports = model('Imagen', Imagen);
+module.exports = model('Imagen', imageSchema);
 
 
 /*const { Schema, model } = require('mongoose');
