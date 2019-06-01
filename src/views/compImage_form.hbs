@@ -1,4 +1,9 @@
- 
+ <style>
+   .swiper-slide{
+      width: 10%;
+      height: 7%;
+   }
+ </style>
 <div class="row">
     <div class="col-md-3">
       <div class="card">
@@ -27,13 +32,14 @@
      </div> 
   </div>
 
-    <div class="col-md-8">
+    <div class="col-md-8" >
       <table class="table">
         <thead>
           <tr>
             <th>titulo</th>
             <th>descrição</th>
             <th>Operação</th>
+            
           </tr>
         </thead>      
         <tbody>
@@ -41,10 +47,13 @@
         <tr>
             <td>{{title}}</td>
             <td>{{description}}</td>
+            
             <td>
-              <a href="{{imageURL}}" target="_blank" 
-              class="btn btn-primary">View</a>
-              <a href="" class="btn btn-danger">Delete</a>
+              <a href="{{imageURL}}" target="_blank" class="btn btn-primary">View</a>
+
+              <a href="/imagens/delete/{{_id}}" class="btn btn-danger">Delete</a>
+              
+              <img src="{{imageURL}}" alt="" class="swiper-slide">
             </td>   
          </tr>  
          {{/each}}       
